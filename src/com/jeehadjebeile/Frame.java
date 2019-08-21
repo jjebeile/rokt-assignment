@@ -63,4 +63,12 @@ public class Frame {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public boolean isSpare() {
+        return isSpare;
+    }
+
+    public boolean isStrike() {
+        return isStrike;
+    }
 }

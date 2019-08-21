@@ -17,8 +17,25 @@ public class Scorecard {
      * Given a scorecard and the results of two bowls, return an updated scorecard.
      */
     public static Scorecard scoreFrame(Scorecard scorecard, int bowl1, int bowl2) throws ScoreCardException {
-        updateScores(scorecard, new Frame(bowl1, bowl2));
+        Frame frame = new Frame(bowl1, bowl2);
+        scorecard.frames[scorecard.currentFrame++] = frame;
+        updateScores(scorecard);
         return scorecard;
+    }
+
+    private static void updateScores(Scorecard scorecard) {
+        Frame[] frames = scorecard.getFrames();
+        // Update scores for Spares and Strikes
+        for(int i=0; i<scorecard.currentFrame-1; i++) {
+            if(frames[i].isSpare()) {
+                if(frames[i+1].isSpare() || frames[i+1].isStrike()) {
+                   frames[i].setScore(0); // Leave unchanged
+                } else {
+                    frames[i].setScore(10 + frames[i+1].getScore());
+                }
+            }
+        }
+
     }
 
     /**
@@ -29,15 +46,6 @@ public class Scorecard {
 //        updateScores(scorecard, new Frame(bowl1, bowl2, bowl3));
         return scorecard;
     }
-
-    private static void updateScores(Scorecard scorecard, Frame frame) {
-        scorecard.frames[scorecard.currentFrame] = frame;
-
-
-        scorecard.currentFrame++;
-    }
-
-
 
     /**
      * Returns the current score based on the number of frames/bowls played.
