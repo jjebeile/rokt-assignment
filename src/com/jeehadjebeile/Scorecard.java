@@ -6,7 +6,7 @@ public class Scorecard {
     private int currentFrame = 0;
 
     public Frame[] getFrames() {
-        return frames;
+        return this.frames;
     }
 
     public static Scorecard getInstance() {
@@ -17,11 +17,11 @@ public class Scorecard {
      * Given a scorecard and the results of two bowls, return an updated scorecard.
      */
     public static Scorecard scoreFrame(Scorecard scorecard, int bowl1, int bowl2) throws ScoreCardException {
-
         validateScores(bowl1, bowl2);
-
+        scorecard.frames[scorecard.currentFrame++] = new Frame(bowl1, bowl2);
         return scorecard;
     }
+
 
     private static void validateScores(int bowl1, int bowl2) throws ScoreCardException {
         // Bowl1 validation
@@ -46,21 +46,23 @@ public class Scorecard {
     public int getCurrentScore() {
         int currentScore = 0;
         for(Frame frame : getFrames()) {
-            int bowl1 = frame.getBowl1();
-            int bowl2 = frame.getBowl2();
+            if(frame != null) {
+                int bowl1 = frame.getBowl1();
+                int bowl2 = frame.getBowl2();
 
-            // Strike
-            if(bowl1 == 10) {
-                // Calculate next two bowls
+                // Strike
+                if(bowl1 == 10) {
+                    // Calculate next two bowls
+                }
+
+                // Spare
+                if(bowl1 + bowl2 == 10) {
+                    // Calculate next bowl
+                }
+
+                // Open Frame
+                currentScore += bowl1 + bowl2;
             }
-
-            // Spare
-            if(bowl1 + bowl2 == 10) {
-                // Calculate next bowl
-            }
-
-            // Open Frame
-
         }
         return currentScore;
     }
