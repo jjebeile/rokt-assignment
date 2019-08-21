@@ -38,6 +38,34 @@ public class ScorecardTest extends TestCase {
         }
     }
 
+    public void testScoreFrameWithSpares() {
+        // No Spares or Strikes and exactly 10 frames (last frame only 2 balls)
+        try {
+            scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
+            assertEquals(9, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 3, 7);
+            assertEquals(9, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 1, 2);
+            assertEquals(25, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 8, 0);
+            assertEquals(33, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 0, 10);
+            assertEquals(33, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 8, 1);
+            assertEquals(44, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 2, 7);
+            assertEquals(53, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 3, 6);
+            assertEquals(62, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
+            assertEquals(71, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 5, 4);
+            assertEquals(80, scorecard.getCurrentScore());
+        } catch (ScoreCardException sce) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
     public void testInvalidStrike() {
         try {
             scorecard = Scorecard.scoreFrame(scorecard, 10, 1);
