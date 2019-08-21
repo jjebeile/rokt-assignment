@@ -11,6 +11,7 @@ public class Frame {
 
     public Frame(int bowl1, int bowl2) throws ScoreCardException{
         validateScores(bowl1, bowl2);
+        validateFrameScores(bowl1, bowl2);
 
         this.bowl1 = bowl1;
         this.bowl2 = bowl2;
@@ -26,6 +27,25 @@ public class Frame {
         }
     }
 
+    public Frame(int bowl1, int bowl2, int bowl3) throws ScoreCardException{
+        validateScores(bowl1, bowl2, bowl3);
+
+        this.bowl1 = bowl1;
+        this.bowl2 = bowl2;
+        this.bowl3 = bowl3;
+
+        if(this.bowl1 == 10 && this.bowl2 == 0) {
+            this.isStrike = true;
+            this.score = 0;
+        } else if(this.bowl1 + this.bowl2 == 10) {
+            this.isSpare = true;
+            this.score = 0;
+        } else {
+            this.score = this.bowl1 + this.bowl2;
+        }
+    }
+
+
     private void validateScores(int bowl1, int bowl2) throws ScoreCardException {
         // Bowl1 validation
         if(bowl1 < 0 || bowl1 > 10) {
@@ -36,10 +56,18 @@ public class Frame {
         if(bowl2 < 0 || bowl2 > 10) {
             throw new ScoreCardException(ScoreCardException.INVALID_BOWL2_SCORE);
         }
+    }
 
-        // If bowl is a Strike, bowl 2 must be 0
-        if(bowl1 == 10 && bowl2 > 0) {
-            throw new ScoreCardException(ScoreCardException.INVALID_STRIKE);
+    private void validateFrameScores(int bowl1, int bowl2) throws ScoreCardException {
+        if(bowl1 + bowl2 > 10) {
+            throw new ScoreCardException(ScoreCardException.INVALID_SCORE_IN_FRAME);
+        }
+    }
+
+    private void validateScores(int bowl1, int bowl2, int bowl3) throws ScoreCardException{
+        validateScores(bowl1, bowl2);
+        if(bowl3 < 0 || bowl3 > 10) {
+            throw new ScoreCardException(ScoreCardException.INVALID_BOWL3_SCORE);
         }
     }
 

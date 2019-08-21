@@ -42,15 +42,19 @@ public class Scorecard {
                 }
             }
         }
-
     }
 
     /**
      * Given a scorecard and the results of three bowls, return an updated scorecard.
      */
     public static Scorecard scoreFrame(Scorecard scorecard, int bowl1, int bowl2, int bowl3) throws ScoreCardException {
-//        validateScores(bowl1, bowl2, bowl3);
-//        updateScores(scorecard, new Frame(bowl1, bowl2, bowl3));
+        Frame frame = new Frame(bowl1, bowl2, bowl3);
+        if(scorecard.currentFrame != 9) {
+            throw new ScoreCardException(ScoreCardException.TOO_MANY_BOWLS_IN_FRAME);
+        }
+        frame.setScore(bowl1 + bowl2 + bowl3);
+        scorecard.frames[scorecard.currentFrame] = frame;
+
         return scorecard;
     }
 
