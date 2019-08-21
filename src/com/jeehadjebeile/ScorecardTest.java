@@ -43,24 +43,24 @@ public class ScorecardTest extends TestCase {
         try {
             scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
             assertEquals(9, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 3, 7);
+            scorecard = Scorecard.scoreFrame(scorecard, 3, 7); // Spare
             assertEquals(9, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 1, 2);
-            assertEquals(25, scorecard.getCurrentScore());
+            assertEquals(23, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 8, 0);
-            assertEquals(33, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 0, 10);
-            assertEquals(33, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 8, 1);
-            assertEquals(61, scorecard.getCurrentScore());
+            assertEquals(31, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 0, 10); // Spare
+            assertEquals(31, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 8, 2); // Spare
+            assertEquals(49, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 2, 7);
             assertEquals(70, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 4, 6);
+            scorecard = Scorecard.scoreFrame(scorecard, 4, 6); // Spare
             assertEquals(70, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
-            assertEquals(98, scorecard.getCurrentScore());
+            assertEquals(93, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 5, 4);
-            assertEquals(107, scorecard.getCurrentScore());
+            assertEquals(102, scorecard.getCurrentScore());
         } catch (ScoreCardException sce) {
             fail("Exception should not have been thrown");
         }
@@ -71,24 +71,24 @@ public class ScorecardTest extends TestCase {
         try {
             scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
             assertEquals(9, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
+            scorecard = Scorecard.scoreFrame(scorecard, 10, 0); // Strike
             assertEquals(9, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 1, 2);
-            assertEquals(26, scorecard.getCurrentScore());
+            assertEquals(25, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 8, 0);
-            assertEquals(34, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(34, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(34, scorecard.getCurrentScore());
+            assertEquals(33, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 10, 0); // Strike
+            assertEquals(33, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 10, 0); // Strike
+            assertEquals(33, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 2, 7);
-            assertEquals(84, scorecard.getCurrentScore());
-            scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(84, scorecard.getCurrentScore());
+            assertEquals(83, scorecard.getCurrentScore());
+            scorecard = Scorecard.scoreFrame(scorecard, 10, 0); // Strike
+            assertEquals(83, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
-            assertEquals(112, scorecard.getCurrentScore());
+            assertEquals(111, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 5, 4);
-            assertEquals(121, scorecard.getCurrentScore());
+            assertEquals(120, scorecard.getCurrentScore());
         } catch (ScoreCardException sce) {
             fail("Exception should not have been thrown");
         }
@@ -180,25 +180,25 @@ public class ScorecardTest extends TestCase {
         // All Strikes, should end up with a 300 as final score.
         try {
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(0, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(0, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(30, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(60, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(90, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(120, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(150, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(180, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 0);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(210, scorecard.getCurrentScore());
             scorecard = Scorecard.scoreFrame(scorecard, 10, 10, 10);
-            assertEquals(9, scorecard.getCurrentScore());
+            assertEquals(300, scorecard.getCurrentScore());
         } catch (ScoreCardException sce) {
             fail("Exception should not have been thrown");
         }

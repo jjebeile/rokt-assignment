@@ -27,11 +27,18 @@ public class Scorecard {
         Frame[] frames = scorecard.getFrames();
         // Update scores for Spares and Strikes
         for(int i=0; i<scorecard.currentFrame-1; i++) {
-            if(frames[i].isSpare()) {
-                if(frames[i+1].isSpare() || frames[i+1].isStrike()) {
-                   frames[i].setScore(0); // Leave unchanged
+            if (frames[i].isSpare()) {
+                frames[i].setScore(10 + frames[i + 1].getBowl1());
+            }
+            if (frames[i].isStrike()) {
+                if (frames[i + 1].isSpare()) {
+                    frames[i].setScore(20);
+                } else if(frames[i + 1].isStrike()) {
+                    if (i < scorecard.currentFrame - 2) {
+                        frames[i].setScore(20 + frames[i + 2].getBowl1());
+                    }
                 } else {
-                    frames[i].setScore(10 + frames[i+1].getScore());
+                    frames[i].setScore(10 + frames[i + 1].getScore());
                 }
             }
         }
