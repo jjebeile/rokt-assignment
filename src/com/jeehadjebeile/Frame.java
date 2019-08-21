@@ -2,18 +2,14 @@ package com.jeehadjebeile;
 
 public class Frame {
 
-    private int num;
-    private int bowl1;
-    private int bowl2;
-    private int bowl3;
-    private int score;
+    private int bowl1 = 0;
+    private int bowl2 = 0;
+    private int bowl3 = 0;
+    private int score = 0;
 
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
+    public Frame(int bowl1, int bowl2) {
+        this.bowl1 = bowl1;
+        this.bowl2 = bowl2;
     }
 
     public int getBowl1() {
