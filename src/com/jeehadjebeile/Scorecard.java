@@ -18,27 +18,26 @@ public class Scorecard {
      */
     public static Scorecard scoreFrame(Scorecard scorecard, int bowl1, int bowl2) throws ScoreCardException {
 
-        if(!isValidScore(bowl1, bowl2)) {
-            throw new ScoreCardException("Invalid Score Combination Thrown" + "(" + bowl1 + "," + bowl2 + ")");
-        }
+        validateScores(bowl1, bowl2);
 
         return scorecard;
     }
 
-    private static boolean isValidScore(int bowl1, int bowl2) throws ScoreCardException {
-        boolean isValid = true;
+    private static void validateScores(int bowl1, int bowl2) throws ScoreCardException {
+        // Bowl1 validation
+        if(bowl1 < 0 || bowl1 > 10) {
+            throw new ScoreCardException(ScoreCardException.INVALID_BOWL1_SCORE);
+        }
 
-        // If first bowl is a Strike, bowl 2 must be 0
+        // Bowl2 validation
+        if(bowl2 < 0 || bowl2 > 10) {
+            throw new ScoreCardException(ScoreCardException.INVALID_BOWL2_SCORE);
+        }
+
+        // If bowl is a Strike, bowl 2 must be 0
         if(bowl1 == 10 && bowl2 > 0) {
             throw new ScoreCardException(ScoreCardException.INVALID_STRIKE);
         }
-
-        // If either bowl is greater than 10 or if the sum of both bowls is greater than 10
-        if(bowl1 > 10 || bowl2 > 10 || bowl1 + bowl2 > 10) {
-            isValid = false;
-        }
-
-        return isValid;
     }
 
     /**

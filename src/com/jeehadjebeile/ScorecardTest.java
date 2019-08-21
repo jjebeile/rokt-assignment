@@ -14,14 +14,10 @@ public class ScorecardTest extends TestCase {
 
         try {
             scorecard = Scorecard.scoreFrame(scorecard, 4, 5);
+            assertEquals(9, scorecard.getCurrentScore());
         } catch (ScoreCardException sce) {
             fail("Exception should not have been thrown");
         }
-
-        assertNotNull(scorecard);
-
-//        assertEquals(9, scorecard.getCurrentScore());
-
     }
 
     public void testInvalidStrike() {
@@ -29,6 +25,34 @@ public class ScorecardTest extends TestCase {
             scorecard = Scorecard.scoreFrame(scorecard, 10, 1);
         } catch (ScoreCardException sce) {
             assertEquals(ScoreCardException.INVALID_STRIKE, sce.getMessage());
+        }
+    }
+
+    public void testInvalidBowl1() {
+        try {
+            scorecard = Scorecard.scoreFrame(scorecard, -1, 1);
+        } catch (ScoreCardException sce) {
+            assertEquals(ScoreCardException.INVALID_BOWL1_SCORE, sce.getMessage());
+        }
+
+        try {
+            scorecard = Scorecard.scoreFrame(scorecard, 13, 1);
+        } catch (ScoreCardException sce) {
+            assertEquals(ScoreCardException.INVALID_BOWL1_SCORE, sce.getMessage());
+        }
+    }
+
+    public void testInvalidBowl2() {
+        try {
+            scorecard = Scorecard.scoreFrame(scorecard, 1, -5);
+        } catch (ScoreCardException sce) {
+            assertEquals(ScoreCardException.INVALID_BOWL2_SCORE, sce.getMessage());
+        }
+
+        try {
+            scorecard = Scorecard.scoreFrame(scorecard, 0, 15);
+        } catch (ScoreCardException sce) {
+            assertEquals(ScoreCardException.INVALID_BOWL2_SCORE, sce.getMessage());
         }
     }
 
